@@ -203,6 +203,9 @@ class Main
 		onWin();
 	}
 	
+	/**
+	 * get all checked check boxes value
+	 */
 	function getAccessories(form)
 	{
 		var checkBoxes:Array<HtmlDom> = form.getElementsByTagName("input");
@@ -219,6 +222,10 @@ class Main
 		return accessories;
 	}
 	
+	/**
+	 * when all forms were filled, display 
+	 * the result
+	 */
 	function onWin()
 	{
 		hideCocktail();
