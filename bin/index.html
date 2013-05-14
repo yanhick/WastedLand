@@ -1,21 +1,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<link type="text/css" href="sober/style.css" rel="stylesheet"></link>
+		<link type="text/css" href="style.css" rel="stylesheet"></link>
     </head>
     <body>
 		<form id="nameForm">
-			<input type="text"/>
-			<input type="submit"/>
+			<h1>What's your name ?</h1>
+			<div>
+				<input type="text" class="large" />
+			</div>
+			<input type="submit" value="ok" />
 		</form>
 		<form id="cocktailForm" style="display:none;">
-			<input type="radio" name="cocktail" value="mojito"/>
-			<input type="radio" name="cocktail" value="tequila sunrise"/>
-			<input type="submit"/>
+			<h1>What do you drink ?</h1>
+			<div>
+				<input type="radio" name="cocktail" value="mojito"/> a mojito
+				<input type="radio" name="cocktail" value="tequila sunrise"/> a tequila sunrise
+				<input type="radio" name="cocktail" value="white russian"/> a white russian
+			</div>
+			<input type="submit" value="ok" />
 		</form>
 		<form id="accessoriesForm" style="display:none;">
-			<input type="checkbox" value="straw"/>
-			<input type="checkbox" value="umbrella"/>
-			<input type="submit"/>
+			<h1>What do you want with it ?</h1>
+			<div>
+				<input type="checkbox" value="straw"/> a straw
+				<input type="checkbox" value="umbrella"/> an umbrella
+				<input type="checkbox" value="lemon slice"/> a lemon slice
+			</div>
+			<input type="submit" value="ok" />
 		</form>
 	</body>
 </html>
