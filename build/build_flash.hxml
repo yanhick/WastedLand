@@ -1,0 +1,6 @@
+-swf ../bin/wastedland.swf
+-main Main
+-cp ../src
+-lib cocktail
+-swf-version 10.2
+--remap js:cocktail
