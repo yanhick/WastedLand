@@ -1,6 +1,8 @@
 import cocktail.api.CocktailView;
+
 import flash.events.KeyboardEvent;
 import flash.Lib;
+import flash.text.TextField;
 import flash.ui.Keyboard;
 import js.Dom;
 
@@ -14,8 +16,11 @@ typedef GameData = {
 }
 
 /**
- * ...
- * @author 
+ * A game demo using cocktail. The game
+ * graphics are done using flash API and the
+ * game UI is done using Cocktail anf the DOM API
+ * 
+ * @author yannick dominguez
  */
 class Main
 {
@@ -24,10 +29,21 @@ class Main
 		new Main();
 	}
 	
+	/**
+	 * the cocktail webview
+	 * component
+	 */
 	var cv:CocktailView;
 	
+	/**
+	 * store game data input
+	 * by the user
+	 */
 	var gameData:GameData;
 	
+	/**
+	 * class constructor
+	 */
 	public function new() 
 	{
 		gameData = {name:"", cocktail:"", accessories:[]};
@@ -36,11 +52,19 @@ class Main
 		initCocktail();
 	}
 	
+	/**
+	 * builds the flash game scene
+	 */
 	function buildScene()
 	{
 		//TODO : build flash scene
 	}
 	
+	/**
+	 * init the cocktail webview 
+	 * and loads the html file for
+	 * the game UI
+	 */
 	function initCocktail()
 	{
 		cv = new CocktailView();
@@ -51,12 +75,17 @@ class Main
 		}
 	}
 	
+	/**
+	 * keyboard listeners for the flash game part
+	 */
 	function setKeyListeners()
 	{
-		//TODO : listen for space press to open cocktail
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyDown);
 	}
 	
+	/**
+	 * when space is pressed, show the cocktail view
+	 */
 	function onKeyDown(e)
 	{
 		if (e.keyCode == Keyboard.SPACE)
@@ -66,19 +95,30 @@ class Main
 		}
 	}
 	
+	/**
+	 * show cocktail by attaching it
+	 * to the flash stage
+	 */
 	function showCocktail()
 	{
 		Lib.current.addChild(cv.root);
 	}
 	
+	/**
+	 * hide cocktail by removing it
+	 * from the stage
+	 */
 	function hideCocktail()
 	{
 		Lib.current.removeChild(cv.root);
 	}
 	
-	function setFormsListeners(document)
+	/**
+	 * get all forms in the html doc for UI,
+	 * and listens for each form submission events
+	 */
+	function setFormsListeners(document:Document)
 	{
-		//TODO : listen to document form submission for each form
 		var forms:Array<HtmlDom> = document.getElementsByTagName("form");
 		
 		for (form in forms)
@@ -87,6 +127,11 @@ class Main
 		}
 	}
 	
+	/**
+	 * when a form is submitted, store its
+	 * info then go to the next form or end
+	 * the game if last form
+	 */
 	function onFormSubmit(e:Event)
 	{
 		e.preventDefault();
@@ -105,6 +150,9 @@ class Main
 		}
 	}
 	
+	/**
+	 * store name input by player
+	 */
 	function onNameFormSubmit(form:HtmlDom)
 	{
 		var textinput:FormElement = cast form.getElementsByTagName("input")[0];
@@ -114,6 +162,9 @@ class Main
 		form.ownerDocument.getElementById("cocktailForm").style.display = "block";
 	}
 	
+	/**
+	 * store cocktail choice input by player
+	 */
 	function onCocktailFormSubmit(form:HtmlDom)
 	{
 		gameData.cocktail = getCocktailRadio(form);
@@ -122,23 +173,33 @@ class Main
 		form.ownerDocument.getElementById("accessoriesForm").style.display = "block";
 	}
 	
+	/**
+	 * get the value of the form's radio control
+	 */
 	function getCocktailRadio(form:HtmlDom)
 	{
-		var radios:Array<HtmlDom> = form.getElementsByTagName("input");
-		for (radio in radios)
+		var inputs:Array<HtmlDom> = form.getElementsByTagName("input");
+		for (input in inputs)
 		{
-			var r:Radio = cast radio;
-			if (r.checked)
-				return r.value;
+			var i:FormElement = cast input;
+			if (i.type == "radio")
+			{
+				var r:Radio = cast i;
+				if (r.checked)
+					return r.value;
+			}
+			
 		}
 		
 		return null;
 	}
-	
+		
+	/**
+	 * store cocktail accessories input by player
+	 */
 	function onAccessoriesFormSubmit(form)
 	{
 		gameData.accessories = getAccessories(form);
-		
 		onWin();
 	}
 	
@@ -160,8 +221,12 @@ class Main
 	
 	function onWin()
 	{
-		//TODO : render data using a flash text field
 		hideCocktail();
+		
+		var tf = new TextField();
+		tf.width = 300;
+		tf.text = gameData.name + "," + gameData.cocktail + ","+ gameData.accessories.join(",");
+		Lib.current.addChild(tf);
 		
 	}
 }

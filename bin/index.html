@@ -1,14 +1,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<link type="text/css" href="sober/style.css" rel="stylesheet"></link>
     </head>
     <body>
 		<form id="nameForm">
+			<input type="text"/>
 			<input type="submit"/>
 		</form>
-		<form id="cocktailForm">
+		<form id="cocktailForm" style="display:none;">
+			<input type="radio" name="cocktail" value="mojito"/>
+			<input type="radio" name="cocktail" value="tequila sunrise"/>
 			<input type="submit"/>
 		</form>
-		<form id="accessoriesForm">
+		<form id="accessoriesForm" style="display:none;">
+			<input type="checkbox" value="straw"/>
+			<input type="checkbox" value="umbrella"/>
 			<input type="submit"/>
 		</form>
 	</body>
