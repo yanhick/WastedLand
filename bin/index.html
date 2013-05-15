@@ -5,30 +5,32 @@
     </head>
     <body>
 		<img src="assets/mario_head.gif" class="mario" />
-		<form id="nameForm">
-			<h1>What's your name ?</h1>
-			<div>
-				<input type="text" class="large" />
-			</div>
-			<input type="submit" value="ok" />
-		</form>
-		<form id="cocktailForm" style="display:none;">
-			<h1>What do you drink ?</h1>
-			<div>
-				<input type="radio" name="cocktail" value="mojito"/> a mojito
-				<input type="radio" name="cocktail" value="tequila sunrise"/> a tequila sunrise
-				<input type="radio" name="cocktail" value="white russian"/> a white russian
-			</div>
-			<input type="submit" value="ok" />
-		</form>
-		<form id="accessoriesForm" style="display:none;">
-			<h1>What do you want with it ?</h1>
-			<div>
-				<input type="checkbox" value="straw"/> a straw
-				<input type="checkbox" value="umbrella"/> an umbrella
-				<input type="checkbox" value="lemon slice"/> a lemon slice
-			</div>
-			<input type="submit" value="ok" />
-		</form>
+		<div class="formContainer">
+			<form id="nameForm">
+				<h1>What's your name ?</h1>
+				<div>
+					<input type="text" class="large" />
+				</div>
+				<input type="submit" value="ok" />
+			</form>
+			<form id="cocktailForm" style="display:none;">
+				<h1>What do you drink ?</h1>
+				<div>
+					<input type="radio" name="cocktail" value="mojito"/> a mojito
+					<input type="radio" name="cocktail" value="tequila sunrise"/> a tequila sunrise
+					<input type="radio" name="cocktail" value="white russian"/> a white russian
+				</div>
+				<input type="submit" value="ok" />
+			</form>
+			<form id="accessoriesForm" style="display:none;">
+				<h1>What do you want with it ?</h1>
+				<div>
+					<input type="checkbox" value="straw"/> a straw
+					<input type="checkbox" value="umbrella"/> an umbrella
+					<input type="checkbox" value="lemon slice"/> a lemon slice
+				</div>
+				<input type="submit" value="ok" />
+			</form>
+		</div>
 	</body>
 </html>

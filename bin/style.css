@@ -6,7 +6,6 @@
 body {
 	border:thick solid;
 	padding:20px;
-	
 }
 
 h1 {
@@ -28,7 +27,6 @@ input[type=text].large {
 	height:30px;
 }
 
-.mario {
+.mario, .formContainer {
 	float:left;
-	display:block;
 }
