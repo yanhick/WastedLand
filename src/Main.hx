@@ -1,4 +1,7 @@
 import cocktail.api.CocktailView;
+import flash.display.Bitmap;
+import flash.events.MouseEvent;
+import nme.installer.Assets;
 
 import flash.events.KeyboardEvent;
 import flash.Lib;
@@ -57,7 +60,20 @@ class Main
 	 */
 	function buildScene()
 	{
-		//TODO : build flash scene
+		var inn = new Bitmap(Assets.getBitmapData("assets/inn.png"));
+		var mario = new Bitmap(Assets.getBitmapData("assets/mario.png"));
+		var link = new Bitmap(Assets.getBitmapData("assets/link.png"));
+		
+		Lib.current.addChild(inn);
+		Lib.current.addChild(mario);
+		Lib.current.addChild(link);
+		
+		mario.x = 540;
+		mario.y = 300;
+		
+		link.x = 250;
+		link.y = 340;
+		
 	}
 	
 	/**
