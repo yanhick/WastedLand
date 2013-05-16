@@ -132,7 +132,6 @@ class Main
 	function hideCocktail()
 	{
 		Lib.current.removeChild(cv.root);
-		cv.dispose();
 	}
 	
 	/**
