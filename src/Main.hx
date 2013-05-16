@@ -244,8 +244,7 @@ class Main
 	}
 	
 	/**
-	 * when all forms were filled, display 
-	 * the result
+	 * hide coctail view with transition effect
 	 */
 	function onWin()
 	{
@@ -268,7 +267,7 @@ class Main
 			var result = "
 			<h1>Congratulations ::name:: !!!</h1>
 			<h2>You've have successfully ordered a ::cocktail::</h2>
-			<p> with : ::foreach accessories::::__current__::::end::</p>";
+			<p> with : ::foreach accessories::::__current__:: / ::end::</p>";
 			
 			endScreenView.document.getElementById("result").innerHTML = new Template(result).execute(gameData);
 			Lib.current.addChild(endScreenView.root);
