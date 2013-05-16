@@ -1,6 +1,7 @@
 import cocktail.api.CocktailView;
 import flash.display.Bitmap;
 import flash.events.MouseEvent;
+import haxe.Template;
 import nme.installer.Assets;
 
 import flash.events.KeyboardEvent;
@@ -8,6 +9,7 @@ import flash.Lib;
 import flash.text.TextField;
 import flash.ui.Keyboard;
 import js.Dom;
+import com.eclecticdesignstudio.motion.Actuate;
 
 /**
  * Store data provided by the player
@@ -86,6 +88,9 @@ class Main
 		cv = new CocktailView();
 		
 		cv.loadURL("index.html");
+		
+		cv.viewport = { x:200, y:200, width:Lib.current.stage.stageWidth - 400, height:Lib.current.stage.stageHeight - 400 };
+		
 		cv.window.onload = function(e) {
 			setFormsListeners(cv.document);
 		}
@@ -127,6 +132,7 @@ class Main
 	function hideCocktail()
 	{
 		Lib.current.removeChild(cv.root);
+		cv.dispose();
 	}
 	
 	/**
@@ -244,12 +250,29 @@ class Main
 	 */
 	function onWin()
 	{
-		hideCocktail();
-		
-		var tf = new TextField();
-		tf.width = 300;
-		tf.text = gameData.name + "," + gameData.cocktail + ","+ gameData.accessories.join(",");
-		Lib.current.addChild(tf);
-		
+		Actuate.tween(cv.root, 1, { alpha:0, width:0, height:0 } ).onComplete(function() {
+			hideCocktail();
+			end();
+			
+		});
+	}
+	
+	/**
+	 * display end screen with data provided by user
+	 */
+	function end()
+	{	
+		var endScreenView = new CocktailView();
+		endScreenView.loadURL("endscreen.html");
+		endScreenView.window.onload = function(e) {
+			
+			var result = "
+			<h1>Congratulations ::name:: !!!</h1>
+			<h2>You've have successfully ordered a ::cocktail::</h2>
+			<p> with : ::foreach accessories::::__current__::::end::</p>";
+			
+			endScreenView.document.getElementById("result").innerHTML = new Template(result).execute(gameData);
+			Lib.current.addChild(endScreenView.root);
+		}
 	}
 }

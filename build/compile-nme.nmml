@@ -11,10 +11,12 @@
 
 	<haxelib name="nme" />
 	<haxelib name="cocktail" />
+	<haxelib name="actuate" />
 
 	<assets path="../bin/style.css" rename="style.css"></assets>
 	<assets path="../bin/sober" rename="sober"></assets>
 	<assets path="../bin/index.html" rename="index.html"></assets>
+	<assets path="../bin/endscreen.html" rename="endscreen.html"></assets>
 	<assets path="../bin/assets" rename="assets"></assets>
 
 	<ndll name="std" />
