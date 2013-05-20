@@ -53,9 +53,9 @@ class Form
 	{
 		var forms:HtmlCollection<HtmlDom> = document.getElementsByTagName("form");
 		
-		for (form in forms)
+		for (i in 0...forms.length)
 		{
-			form.addEventListener("submit", onFormSubmit); 
+			forms[i].addEventListener("submit", onFormSubmit, false); 
 		}
 	}
 	
@@ -111,12 +111,12 @@ class Form
 	function getCocktailRadio(form:HtmlDom)
 	{
 		var inputs:HtmlCollection<HtmlDom> = form.getElementsByTagName("input");
-		for (input in inputs)
+		for (i in 0...inputs.length)
 		{
-			var i:FormElement = cast input;
-			if (i.type == "radio")
+			var input:FormElement = cast inputs[i];
+			if (input.type == "radio")
 			{
-				var r:Radio = cast i;
+				var r:Radio = cast input;
 				if (r.checked)
 					return r.value;
 			}
@@ -148,11 +148,11 @@ class Form
 		
 		var accessories = []; 
 		
-		for (checkBox in checkBoxes)
+		for (i in 0...checkBoxes.length)
 		{
-			var cb:Checkbox = cast checkBox;
-			if (cb.checked)
-				accessories.push(cb.value);
+			var checkbox:Checkbox = cast checkBoxes[i];
+			if (checkbox.checked)
+				accessories.push(checkbox.value);
 		}
 		
 		return accessories;
