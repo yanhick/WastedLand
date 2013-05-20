@@ -1,3 +1,4 @@
+import GameData;
 import cocktail.api.CocktailView;
 import flash.display.Bitmap;
 import flash.events.MouseEvent;
@@ -11,14 +12,7 @@ import flash.ui.Keyboard;
 import js.Dom;
 import com.eclecticdesignstudio.motion.Actuate;
 
-/**
- * Store data provided by the player
- */
-typedef GameData = {
-	var name:String;
-	var cocktail:String;
-	var accessories:Array<String>;
-}
+
 
 /**
  * A game demo using cocktail. The game
@@ -57,6 +51,10 @@ class Main
 		initCocktail();
 	}
 	
+	/////////////////////////////////
+	// FLASH API CODE
+	////////////////////////////////
+	
 	/**
 	 * builds the flash game scene
 	 */
@@ -79,40 +77,23 @@ class Main
 	}
 	
 	/**
-	 * init the cocktail webview 
-	 * and loads the html file for
-	 * the game UI
-	 */
-	function initCocktail()
-	{
-		cv = new CocktailView();
-		
-		cv.loadURL("index.html");
-		
-		cv.viewport = { x:200, y:200, width:Lib.current.stage.stageWidth - 400, height:Lib.current.stage.stageHeight - 400 };
-		
-		cv.window.onload = function(e) {
-			setFormsListeners(cv.document);
-		}
-	}
-	
-	/**
 	 * keyboard listeners for the flash game part
 	 */
 	function setKeyListeners()
 	{
-		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyDown);
+		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 	}
 	
 	/**
 	 * when space is pressed, show the cocktail view
 	 */
-	function onKeyDown(e)
+	function onKeyUp(e)
 	{
 		if (e.keyCode == Keyboard.SPACE)
 		{
 			showCocktail();
-			Lib.current.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyDown);
+			
+			Lib.current.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 		}
 	}
 	
@@ -134,113 +115,26 @@ class Main
 		Lib.current.removeChild(cv.root);
 	}
 	
+	/////////////////////////////////
+	// DOM (COCKTAIL) API CODE
+	////////////////////////////////
+	
 	/**
-	 * get all forms in the html doc for UI,
-	 * and listens for each form submission events
+	 * init the cocktail webview 
+	 * and loads the html file for
+	 * the game UI
 	 */
-	function setFormsListeners(document:Document)
+	function initCocktail()
 	{
-		var forms:Array<HtmlDom> = document.getElementsByTagName("form");
+		cv = new CocktailView();
 		
-		for (form in forms)
-		{
-			form.addEventListener("submit", onFormSubmit); 
+		cv.loadURL("index.html");
+		
+		cv.viewport = { x:200, y:200, width:Lib.current.stage.stageWidth - 400, height:Lib.current.stage.stageHeight - 400 };
+		
+		cv.window.onload = function(e) {
+			var form = new Form(cv.document, gameData, onWin);
 		}
-	}
-	
-	/**
-	 * when a form is submitted, store its
-	 * info then go to the next form or end
-	 * the game if last form
-	 */
-	function onFormSubmit(e:Event)
-	{
-		e.preventDefault();
-		
-		var form:HtmlDom = cast e.target;
-		switch (form.id)
-		{
-			case "nameForm":
-				onNameFormSubmit(form);
-				
-			case "cocktailForm":
-				onCocktailFormSubmit(form);
-				
-			case "accessoriesForm":	
-				onAccessoriesFormSubmit(form);
-		}
-	}
-	
-	/**
-	 * store name input by player
-	 */
-	function onNameFormSubmit(form:HtmlDom)
-	{
-		var textinput:FormElement = cast form.getElementsByTagName("input")[0];
-		gameData.name = textinput.value;
-		
-		form.style.display = "none";
-		form.ownerDocument.getElementById("cocktailForm").style.display = "block";
-	}
-	
-	/**
-	 * store cocktail choice input by player
-	 */
-	function onCocktailFormSubmit(form:HtmlDom)
-	{
-		gameData.cocktail = getCocktailRadio(form);
-		
-		form.style.display = "none";
-		form.ownerDocument.getElementById("accessoriesForm").style.display = "block";
-	}
-	
-	/**
-	 * get the value of the form's radio control
-	 */
-	function getCocktailRadio(form:HtmlDom)
-	{
-		var inputs:Array<HtmlDom> = form.getElementsByTagName("input");
-		for (input in inputs)
-		{
-			var i:FormElement = cast input;
-			if (i.type == "radio")
-			{
-				var r:Radio = cast i;
-				if (r.checked)
-					return r.value;
-			}
-			
-		}
-		
-		return null;
-	}
-		
-	/**
-	 * store cocktail accessories input by player
-	 */
-	function onAccessoriesFormSubmit(form)
-	{
-		gameData.accessories = getAccessories(form);
-		onWin();
-	}
-	
-	/**
-	 * get all checked check boxes value
-	 */
-	function getAccessories(form)
-	{
-		var checkBoxes:Array<HtmlDom> = form.getElementsByTagName("input");
-		
-		var accessories = []; 
-		
-		for (checkBox in checkBoxes)
-		{
-			var cb:Checkbox = cast checkBox;
-			if (cb.checked)
-				accessories.push(cb.value);
-		}
-		
-		return accessories;
 	}
 	
 	/**

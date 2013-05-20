@@ -1,0 +1,4 @@
+-main Form
+-cp ../src
+-js ../bin/Main.js
+-lib cocktail
