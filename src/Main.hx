@@ -133,7 +133,7 @@ class Main
 		cv.viewport = { x:200, y:200, width:Lib.current.stage.stageWidth - 400, height:Lib.current.stage.stageHeight - 400 };
 		
 		cv.window.onload = function(e) {
-			var form = new Form(cv.document, gameData, onWin);
+			var form = new FormsManager(cv.document, gameData, onWin);
 		}
 	}
 	

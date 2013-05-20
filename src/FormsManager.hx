@@ -9,7 +9,7 @@ import GameData;
  * 
  * @author yannick dominguez
  */
-class Form
+class FormsManager
 {
 	/**
 	 * allows to build this class individually in JS 
@@ -18,7 +18,7 @@ class Form
 	static function main()
 	{
 		Lib.window.onload = function(e) {
-			new Form(Lib.document, {name:"", cocktail:"", accessories:[]});
+			new FormsManager(Lib.document, {name:"", cocktail:"", accessories:[]});
 		}
 	}
 	

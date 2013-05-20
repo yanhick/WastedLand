@@ -1,4 +1,4 @@
--main Form
+-main FormsManager
 -cp ../src
--js ../bin/Main.js
+-js ../bin/Form.js
 -lib cocktail
